@@ -1,6 +1,7 @@
     # Eclipse
-    /.C:\\Users\\yahia1\\eclipse-workspace\\spaceinvaders
-    /.SpaceInvaders
+    /. C:\\Users\\yahia1\\eclipse-workspace\\spaceinvaders
+    /. SpaceInvaders
+    /. settings/
 
     # Maven
     /target/
