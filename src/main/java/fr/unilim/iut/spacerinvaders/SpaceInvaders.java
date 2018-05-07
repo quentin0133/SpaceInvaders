@@ -12,18 +12,6 @@ public class SpaceInvaders {
 	private int hauteur;
 	private Vaisseau vaisseau;
 	
-	public class SpaceInvadersTest {
-			
-	private SpaceInvaders spaceinvaders;
-	
-		@Before
-		public void initialisation() {
-		    spaceinvaders = new SpaceInvaders(15, 10);
-		}
-	
-		//...
-	}
-	
 	public SpaceInvaders(int longueur, int hauteur) {
 		this.longueur = longueur;
 		this.hauteur = hauteur;
@@ -34,7 +22,7 @@ public class SpaceInvaders {
 	     return recupererEspaceJeuDansChaineASCII();
 	}
 
-	private String recupererEspaceJeuDansChaineASCII() {
+	public String recupererEspaceJeuDansChaineASCII() {
 		StringBuilder espaceDeJeu = new StringBuilder();
 	     for (int y = 0; y < hauteur; y++) {
 	         for (int x = 0; x < longueur; x++) {
@@ -69,5 +57,15 @@ public class SpaceInvaders {
 
 	private boolean estDansEspaceJeu(int x, int y) {
 		return (x >= 0) && (x < longueur) && (y >= 0) && (y < hauteur);
+	}
+
+	public void deplacerVaisseauVersLaDroite() {
+		if (vaisseau.abscisse()< (longueur-1))
+			vaisseau.seDeplacerVersLaDroite();
+	}
+
+	public void deplacerVaisseauVersLaGauche() {
+		if (vaisseau.ordonne()< (hauteur-1))
+			vaisseau.seDeplacerVersLaGauche();
 	}
 }
