@@ -1,4 +1,4 @@
-package fr.unilim.iut.spaceinvaders.util;
+package fr.unilim.iut.vaisseau;
 
 @SuppressWarnings("serial")
 public class MissileException extends RuntimeException {

@@ -1,6 +1,9 @@
-package fr.unilim.iut.spaceinvaders;
+package fr.unilim.iut.spaceinvaders.model;
 
-import fr.unilim.iut.spaceinvaders.util.MissileException;
+import fr.unilim.iut.spaceinvaders.Dimension;
+import fr.unilim.iut.spaceinvaders.Position;
+import fr.unilim.iut.spaceinvaders.Sprite;
+import fr.unilim.iut.vaisseau.MissileException;
 
 public class Vaisseau extends Sprite {
 	

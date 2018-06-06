@@ -1,7 +1,9 @@
 package fr.unilim.iut.spaceinvaders;
 
 import org.junit.Test;
-import fr.unilim.iut.spaceinvaders.util.MissileException;
+
+import fr.unilim.iut.spaceinvaders.model.Vaisseau;
+import fr.unilim.iut.vaisseau.MissileException;
 
 public class VaisseauTest {
 	

@@ -59,5 +59,4 @@ public abstract class Sprite {
 		this.origine.changerOrdonnee(this.origine.ordonnee() + direction.valeur()*vitesse);
 
 	}
-	
 }
