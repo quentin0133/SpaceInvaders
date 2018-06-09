@@ -29,5 +29,4 @@ public class Vaisseau extends Sprite {
 		Position positionOrigineMissile = new Position(abscisseOrigineMissile, ordonneeeOrigineMissile);
 		return positionOrigineMissile;
 	}
-
 }

@@ -1,5 +1,6 @@
 package fr.unilim.iut.spaceinvaders.model;
 
+import fr.unilim.iut.spaceinvaders.Collission;
 import fr.unilim.iut.spaceinvaders.Constante;
 import fr.unilim.iut.spaceinvaders.DebordementEspaceJeuException;
 import fr.unilim.iut.spaceinvaders.Dimension;
@@ -18,6 +19,7 @@ public class SpaceInvaders implements Jeu {
 	private Missile missile;
 	private Envahisseur envahisseur;
 	private boolean direction;
+	private Collission collission;
 
 	public SpaceInvaders(int longueur, int hauteur) {
 		this.longueur = longueur;
@@ -138,7 +140,7 @@ public class SpaceInvaders implements Jeu {
 
 	}
 	
-	public void deplacerEnvahisseur() {
+	public void deplacerEnvahisseurAutomatiquement() {
         if(this.envahisseur.abscisseLaPlusAGauche() <= 0)
             this.direction = true;
         else if(this.envahisseur.abscisseLaPlusADroite() >= Constante.ESPACEJEU_LONGUEUR - 1)
@@ -167,7 +169,7 @@ public class SpaceInvaders implements Jeu {
 			deplacerMissile();
 
 		if(this.aUnEnvahisseur()) {
-			this.deplacerEnvahisseur();
+			this.deplacerEnvahisseurAutomatiquement();
 		}
 
 	}
@@ -185,7 +187,28 @@ public class SpaceInvaders implements Jeu {
 			this.missile = null;
 		else
 			this.missile.deplacerVerticalementVers(Direction.HAUT_ECRAN);
-		
+		if(this.aUnEnvahisseur() && this.aUnMissile() && dectectionDeCollission())
+			this.envahisseur = null;
+	}
+
+	public boolean dectectionDeCollission() {
+		if(this.aUnEnvahisseur() && this.aUnMissile()) {
+			for(int i=this.missile.getPosition().abscisse()+this.vaisseau.abscisseLaPlusADroite(); i<this.missile.getDimension().longueur()+this.vaisseau.abscisseLaPlusADroite(); i++) {
+				for(int j=this.missile.getPosition().ordonnee()+this.vaisseau.ordonneeLaPlusHaute(); j<this.missile.getDimension().hauteur()+this.vaisseau.ordonneeLaPlusHaute(); j++) {
+					for(int x=this.envahisseur.getPosition().abscisse()+this.envahisseur.abscisseLaPlusADroite(); x<this.envahisseur.getDimension().longueur()+this.envahisseur.abscisseLaPlusADroite(); x++) {
+						for(int y=this.envahisseur.getPosition().ordonnee()+this.envahisseur.ordonneeLaPlusHaute(); y<this.envahisseur.getDimension().hauteur()+this.envahisseur.ordonneeLaPlusHaute(); y++) {
+							if(this.collission.detecterCollision(i, j, x, y))
+								return true;
+							i++;
+							j++;
+							x++;
+							y++;
+						}
+					}
+				}
+			}
+		}
+		return false;
 	}
 	
 	public void deplacerEnvahisseurVersLaDroite() {

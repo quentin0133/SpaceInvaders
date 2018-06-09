@@ -274,11 +274,9 @@ public class SpaceInvadersTest {
 
 		spaceinvaders.positionnerUnNouveauVaisseau(new Dimension(7,2),new Position(5,9), 1);
 		spaceinvaders.tirerUnMissile(new Dimension(3,2),1);
-		for (int i = 1; i <=6 ; i++) {
+		for (int i = 1; i <=7 ; i++) {
 			spaceinvaders.deplacerMissile();
 		}
-
-		spaceinvaders.deplacerMissile();
 
 		assertEquals("" +
 				"...............\n" + 
@@ -362,7 +360,7 @@ public class SpaceInvadersTest {
 	
 	@Test
 	public void test_EnvahisseurImmobile_DeplacerVaisseauVersLaDroite() {
-		spaceinvaders.positionnerUnNouveauEnvahisseur(new Dimension(2,1),new Position(12,0), 1);
+		spaceinvaders.positionnerUnNouveauEnvahisseur(new Dimension(2,1),new Position(13,0), 1);
 		spaceinvaders.deplacerEnvahisseurVersLaDroite();
 		assertEquals("" + 
 				".............XX\n" + 
@@ -420,5 +418,58 @@ public class SpaceInvadersTest {
 			fail("Dépassement de l'envahisseur vers le haut en raison de sa hauteur trop importante : devrait déclencher une exception DebordementEspaceJeuException");
 		} catch (final DebordementEspaceJeuException e) {
 		}
+	}
+	
+	@Test
+	public void test_EnvahisseurSeFaitToucherParUnMissile() {
+		spaceinvaders.positionnerUnNouveauVaisseau(new Dimension(7,2),new Position(5,9), 1);
+		spaceinvaders.positionnerUnNouveauEnvahisseur(new Dimension(2,1),new Position(7,0), 1);
+		spaceinvaders.tirerUnMissile(new Dimension(3,2),1);
+		for (int i = 1; i <=7 ; i++) {
+			spaceinvaders.deplacerMissile();
+		}
+		assertEquals("" + 
+				"...............\n" + 
+				"...............\n" +
+				"...............\n" + 
+				"...............\n" + 
+				"...............\n" + 
+				"...............\n" + 
+				"...............\n" + 
+				"...............\n" + 
+				".....VVVVVVV...\n" + 
+				".....VVVVVVV...\n" , spaceinvaders.recupererEspaceJeuDansChaineASCII());
+	}
+	
+	@Test
+	public void test_EnvahisseurEsquiveUnMissile() {
+		spaceinvaders.positionnerUnNouveauVaisseau(new Dimension(7,2),new Position(5,9), 1);
+		spaceinvaders.positionnerUnNouveauEnvahisseur(new Dimension(2,1),new Position(13,0), 1);
+		spaceinvaders.tirerUnMissile(new Dimension(3,2),1);
+		for (int i = 1; i <=7 ; i++) {
+			spaceinvaders.deplacerMissile();
+		}
+		assertEquals("" + 
+				".............XX\n" + 
+				"...............\n" +
+				"...............\n" + 
+				"...............\n" + 
+				"...............\n" + 
+				"...............\n" + 
+				"...............\n" + 
+				"...............\n" + 
+				".....VVVVVVV...\n" + 
+				".....VVVVVVV...\n" , spaceinvaders.recupererEspaceJeuDansChaineASCII());
+	}
+	
+	@Test
+	public void test_MethodeDetecterCollission() {
+		spaceinvaders.positionnerUnNouveauVaisseau(new Dimension(7,2),new Position(5,9), 1);
+		spaceinvaders.positionnerUnNouveauEnvahisseur(new Dimension(2,1),new Position(7,0), 1);
+		spaceinvaders.tirerUnMissile(new Dimension(3,2),1);
+		for (int i = 1; i <=6 ; i++) {
+			spaceinvaders.deplacerMissile();
+		}
+		assertEquals(true , spaceinvaders.dectectionDeCollission());
 	}
 }

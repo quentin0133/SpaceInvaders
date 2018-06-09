@@ -55,6 +55,11 @@ public abstract class Sprite {
 	public Dimension getDimension() {
 		return dimension;
 	}
+	
+	public Position getPosition() {
+		return origine;
+	}
+	
 	public void deplacerVerticalementVers(Direction direction) {
 		this.origine.changerOrdonnee(this.origine.ordonnee() + direction.valeur()*vitesse);
 
